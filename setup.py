@@ -19,12 +19,19 @@ class cmake_build_ext(build_ext):
         super().run()
 
     def build_cmake(self, ext):
-        cwd = Path().absolute()
-        build_temp = Path(self.build_temp)
-        build_temp.mkdir(parents=True, exist_ok=True)
-        ext_path = self.get_ext_fullpath(ext.name)
-        ext_dir = Path(ext_path).parent.absolute()
-        ext_dir.mkdir(parents=True, exist_ok=True)
+        if self.editable_mode:
+            src_dir = Path(__file__).parent.absolute()
+            build_dir = src_dir / "build"
+            build_dir.mkdir(exist_ok=True)
+            ext_path = self.get_ext_fullpath(ext.name)
+            ext_dir = Path(ext_path).parent.absolute()
+        else:
+            src_dir = Path().absolute()
+            build_dir = Path(self.build_dir)
+            build_dir.mkdir(parents=True, exist_ok=True)
+            ext_path = self.get_ext_fullpath(ext.name)
+            ext_dir = Path(ext_path).parent.absolute()
+            ext_dir.mkdir(parents=True, exist_ok=True)
 
         config = "Debug" if self.debug else "Release"
         cmake_args = [
@@ -34,8 +41,8 @@ class cmake_build_ext(build_ext):
         ]
         build_args = ["--config", config]
 
-        self.spawn(["cmake", str(cwd), "-B", build_temp] + cmake_args)
-        self.spawn(["cmake", "--build", build_temp] + build_args)
+        self.spawn(["cmake", str(src_dir), "-B", build_dir] + cmake_args)
+        self.spawn(["cmake", "--build", build_dir] + build_args)
 
 
 setup(
