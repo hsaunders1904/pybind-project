@@ -2,4 +2,4 @@
 
 #include <pybind11/pybind11.h>
 
-PYBIND11_MODULE(cpplib, m) { m.attr("__version__") = proj::VERSION; }
+PYBIND11_MODULE(_pyproj, m) { m.attr("__version__") = proj::VERSION; }
