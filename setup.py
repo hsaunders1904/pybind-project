@@ -47,6 +47,6 @@ class cmake_build_ext(build_ext):
 
 
 setup(
-    ext_modules=[CMakeExtension("pyproj.cpplib")],
+    ext_modules=[CMakeExtension("pyproj._pyproj")],
     cmdclass={"build_ext": cmake_build_ext},
 )
