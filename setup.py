@@ -38,10 +38,11 @@ class cmake_build_ext(build_ext):
             f"-DCMAKE_LIBRARY_OUTPUT_DIRECTORY={ext_dir}{os.sep}",
             f"-DCMAKE_BUILD_TYPE={'' if os.name == 'nt' else config}",
             f"-DPython3_EXECUTABLE={sys.executable}",
+            "-Dproj_BUILD_PYTHON=ON",
         ]
         build_args = ["--config", config]
 
-        self.spawn(["cmake", str(src_dir), "-B", build_dir] + cmake_args)
+        self.spawn(["cmake", src_dir, "-B", build_dir] + cmake_args)
         self.spawn(["cmake", "--build", build_dir] + build_args)
 
 

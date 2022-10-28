@@ -6,6 +6,11 @@ project(
   LANGUAGES CXX
 )
 
+option(proj_BUILD_PYTHON "Build python bindings" ON)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 set(proj_INCLUDE_DIR ${CMAKE_CURRENT_LIST_DIR}/src)
 
 add_subdirectory(src)
