@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.18)
 
-project(
-  proj
+project(proj
   VERSION 0.1.0
   LANGUAGES CXX
 )
@@ -15,8 +14,8 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(proj_INCLUDE_DIR ${CMAKE_CURRENT_LIST_DIR}/src)
 
 add_subdirectory(src)
-add_subdirectory(extras)
 if(proj_BUILD_TESTS)
   enable_testing()
   add_subdirectory(tests)
 endif()
+add_subdirectory(extras)

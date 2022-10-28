@@ -7,13 +7,15 @@ set(SRC
 
 set(proj_PYPROJ_LIBRARY_DIR
   ${CMAKE_CURRENT_LIST_DIR}/src/pyproj
-  CACHE PATH "Directory to output python library to."
+  CACHE PATH "Directory to output python library to"
 )
-pybind11_add_module(_pyproj ${SRC})
-target_link_libraries(_pyproj PUBLIC proj::proj)
-set_target_properties(_pyproj PROPERTIES
+pybind11_add_module(proj_pyproj ${SRC})
+target_link_libraries(proj_pyproj PUBLIC proj::proj)
+set_target_properties(proj_pyproj PROPERTIES
+  OUTPUT_NAME _pyproj
   LIBRARY_OUTPUT_DIRECTORY ${proj_PYPROJ_LIBRARY_DIR}
 )
+add_library(proj::pyproj ALIAS proj_pyproj)
 
 if(proj_BUILD_TESTS)
   add_subdirectory(tests)
