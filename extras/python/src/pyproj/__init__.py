@@ -1,5 +1,5 @@
-from . import _cpplib
+from . import cpplib
 
 
 def hello() -> str:
-    return _cpplib.hello()
+    return cpplib.hello()

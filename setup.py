@@ -22,20 +22,20 @@ class cmake_build_ext(build_ext):
         cwd = Path().absolute()
         build_temp = Path(self.build_temp)
         build_temp.mkdir(parents=True, exist_ok=True)
-        ext_dir = Path(self.get_ext_fullpath(ext.name)).parent
+        ext_path = self.get_ext_fullpath(ext.name)
+        ext_dir = Path(ext_path).parent.absolute()
         ext_dir.mkdir(parents=True, exist_ok=True)
 
         config = "Debug" if self.debug else "Release"
         cmake_args = [
+            f"-DCMAKE_LIBRARY_OUTPUT_DIRECTORY={ext_dir}{os.sep}",
             f"-DCMAKE_BUILD_TYPE={'' if os.name == 'nt' else config}"
             f"-DPython3_EXECUTABLE={sys.executable}",
         ]
         build_args = ["--config", config]
 
-        os.chdir(str(build_temp))
-        self.spawn(["cmake", str(cwd)] + cmake_args)
-        self.spawn(["cmake", "--build", "."] + build_args)
-        os.chdir(str(cwd))
+        self.spawn(["cmake", str(cwd), "-B", build_temp] + cmake_args)
+        self.spawn(["cmake", "--build", build_temp] + build_args)
 
 
 setup(
