@@ -1,0 +1,3 @@
+# Libraries produced by build
+_pyproj.*.so
+_pyproj.*.pyd
