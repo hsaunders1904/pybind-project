@@ -29,7 +29,7 @@ class cmake_build_ext(build_ext):
         config = "Debug" if self.debug else "Release"
         cmake_args = [
             f"-DCMAKE_LIBRARY_OUTPUT_DIRECTORY={ext_dir}{os.sep}",
-            f"-DCMAKE_BUILD_TYPE={'' if os.name == 'nt' else config}"
+            f"-DCMAKE_BUILD_TYPE={'' if os.name == 'nt' else config}",
             f"-DPython3_EXECUTABLE={sys.executable}",
         ]
         build_args = ["--config", config]
