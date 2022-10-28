@@ -1,5 +1,1 @@
-from . import cpplib
-
-
-def hello() -> str:
-    return cpplib.hello()
+from .cpplib import __version__

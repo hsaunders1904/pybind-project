@@ -1,8 +1,10 @@
+configure_file("version.h.in" "${CMAKE_CURRENT_LIST_DIR}/version.h")
+
 set(SRC
-  "proj.cpp"
+  "version.cpp"
 )
 set(HDR
-  "proj.h"
+  "version.h"
 )
 
 add_library(proj_proj STATIC ${SRC} ${HDR})
