@@ -1,13 +1,17 @@
 [project]
 name = "pyproj"
-version = "0.1.0"
+authors = [{name="hsaunders1904"}]
+dynamic=['version']
 requires-python = ">=3.8"
 
 [build-system]
-requires = ["setuptools >= 61.0.0"]
+requires = ["setuptools >= 61.0.0", "cmake >= 3.18"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where = ["extras/python/src"]
 include = ["pyproj*"]
 exclude = ["*tests*"]
+
+[tool.setuptools.dynamic]
+version = {attr = "pyproj.__version__"}
