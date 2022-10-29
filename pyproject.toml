@@ -1,7 +1,6 @@
 [project]
 name = "pyproj"
-authors = [{name="hsaunders1904"}]
-dynamic=['version']
+version = "0.1.0"
 requires-python = ">=3.8"
 
 [project.urls]
@@ -9,13 +8,10 @@ homepage = "https://github.com/hsaunders1904/pybind-project"
 repository = "https://github.com/hsaunders1904/pybind-project"
 
 [build-system]
-requires = ["setuptools >= 61.0.0", "cmake >= 3.18"]
+requires = ["setuptools >= 61.0.0"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where = ["extras/python/src"]
 include = ["pyproj*"]
 exclude = ["*tests*"]
-
-[tool.setuptools.dynamic]
-version = {attr = "pyproj.__version__"}
