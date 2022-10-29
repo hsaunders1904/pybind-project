@@ -7,11 +7,17 @@ project(proj
 
 option(proj_BUILD_PYTHON "Build python bindings" ON)
 option(proj_BUILD_TESTS "Build tests" ON)
+option(proj_ENABLE_COVERAGE "Add coverage flags to build" OFF)
 
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/tools/cmake)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(proj_INCLUDE_DIR ${CMAKE_CURRENT_LIST_DIR}/src)
+
+if(proj_ENABLE_COVERAGE)
+  include(target_coverage)
+endif()
 
 add_subdirectory(src)
 if(proj_BUILD_TESTS)
