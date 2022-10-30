@@ -22,7 +22,7 @@ jobs:
     - name: Build
       shell: bash
       run: |
-        apt install -y cmake make
+        sudo apt install -y cmake make
         cmake -B build/ -DCMAKE_BUILD_TYPE=Release
         cmake --build build
 
