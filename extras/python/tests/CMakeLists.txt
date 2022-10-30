@@ -3,7 +3,8 @@ set(SRC
 )
 
 foreach(_test ${SRC})
-  add_test(python.${_test}
+  add_test(
+    NAME python.${_test}
     COMMAND ${Python3_EXECUTABLE} -m pytest ${CMAKE_CURRENT_LIST_DIR}/pyproj/${_test}
   )
   set_tests_properties(python.${_test} PROPERTIES
