@@ -18,7 +18,7 @@ class cmake_build_ext(build_ext):
 
     def build_cmake(self, ext):
         cmake_args = []
-        if self.editable_mode:
+        if getattr(self, "editable_mode", None):
             src_dir = Path(__file__).parent.absolute()
             build_dir = src_dir / "build"
             build_dir.mkdir(exist_ok=True)
@@ -30,7 +30,7 @@ class cmake_build_ext(build_ext):
             build_dir = Path(self.build_temp)
             build_dir.mkdir(parents=True, exist_ok=True)
             ext_path = self.get_ext_fullpath(ext.name)
-            ext_dir = Path(ext_path).parent.absolute()
+            ext_dir = Path(ext_path).parent
             ext_dir.mkdir(parents=True, exist_ok=True)
             cmake_args.append("-Dproj_BUILD_TESTS=OFF")
 
@@ -45,8 +45,8 @@ class cmake_build_ext(build_ext):
         )
         build_args = ["--config", config]
 
-        self.spawn(["cmake", src_dir, "-B", build_dir] + cmake_args)
-        self.spawn(["cmake", "--build", build_dir] + build_args)
+        self.spawn(["cmake", str(src_dir), "-B", str(build_dir)] + cmake_args)
+        self.spawn(["cmake", "--build", str(build_dir)] + build_args)
 
 
 setup(
