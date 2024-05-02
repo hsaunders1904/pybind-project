@@ -8,10 +8,14 @@ homepage = "https://github.com/hsaunders1904/pybind-project"
 repository = "https://github.com/hsaunders1904/pybind-project"
 
 [build-system]
-requires = ["setuptools >= 61.0.0", "cmake >= 3.18"]
-build-backend = "setuptools.build_meta"
+requires = ["scikit-build-core", "pybind11"]
+build-backend = "scikit_build_core.build"
+
+[tool.scikit-build]
+wheel.packages = ["extras/python/src/pyproj"]
+
+[tool.scikit-build.cmake.define]
+proj_BUILD_TESTS = "OFF"
 
 [tool.setuptools.packages.find]
 where = ["extras/python/src"]
-include = ["pyproj*"]
-exclude = ["*tests*"]

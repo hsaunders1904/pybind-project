@@ -7,4 +7,5 @@ FetchContent_Declare(
   GIT_TAG ${proj_GOOGLETEST_TAG}
 )
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+set(INSTALL_GTEST OFF CACHE STRING INTERNAL FORCE)
 FetchContent_MakeAvailable(googletest)
